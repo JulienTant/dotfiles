@@ -17,3 +17,8 @@ export PATH="$DOTFILES/bin:$PATH"
 
 # Local bin directories before anything else
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+# go
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
