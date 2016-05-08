@@ -3,3 +3,4 @@
 Most applications get installed through Homebrew Cask. The apps below need to be installed from the App Store because I bought them there and I don't have license keys for them.
 
 - Airmail
+- Moom
