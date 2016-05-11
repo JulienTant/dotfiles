@@ -175,6 +175,8 @@ defaults write com.apple.dock autohide -bool true
 sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
 sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
 
+
+
 ###############################################################################
 # Safari & WebKit                                                             #
 ###############################################################################
@@ -266,6 +268,14 @@ defaults write com.apple.menuextra.clock DateFormat "EEE MMM d  H:mm"
 
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+
+###############################################################################
+# Screenshots                                                                 #
+###############################################################################
+
+mkdir ~/Screenshots/
+defaults write com.apple.screencapture location ~/Screenshots/
 
 ###############################################################################
 # Kill affected applications                                                  #
