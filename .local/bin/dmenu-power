@@ -1,0 +1,10 @@
+#!/bin/sh
+
+    
+case "$(echo -e "Shutdown\nRestart\nLogout" | dmenu \
+    -i -p \
+    "Power:" -l 5)" in
+        Shutdown) exec systemctl poweroff;;
+        Restart) exec systemctl reboot;;
+        Logout) kill -HUP $XDG_SESSION_PID;;
+esac

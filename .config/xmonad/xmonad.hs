@@ -154,26 +154,13 @@ wsScreen :: [ScreenId]
 myWorkspaceIndices :: M.Map String Int
 myWorkspaceIndices = M.fromList $ zip myWorkspaces (map (read::String->Int) wsKeys)
 
-
-appShortcuts = [
-  ("M-e", "e", myEditor)
-
-  , ("M-p", "p", "j4-dmenu-desktop")
-  , ("M-p", "<Backspace>", "dmenu-power")
-  ]
-
-fst3 :: (a, b, c) -> a
-fst3 (x, _, _) = x
-snd3 :: (a, b, c) -> b
-snd3 (_, x, _) = x
-thd3 :: (a, b, c) -> c
-thd3 (_, _, x) = x
-
 myKeys c = mkKeymap c $
   [
   -- Start applications
   ("M-<Return>", spawn $ XMonad.terminal c)
---  , ("M-p", spawn "j4-dmenu-desktop")
+  , ("M-p", spawn "j4-dmenu-desktop")
+  , ("M-<Backspace>", spawn "dmenu-power")
+  , ("M-e", spawn myEditor)
 
   -- Screenshots
   ,  ("M-S-s", spawn "scrot -s '/home/a/screenshots/%F_%T.png' -e 'xclip -selection clipboard -target image/png -i $f'")
@@ -198,19 +185,12 @@ myKeys c = mkKeymap c $
   , ("M-S-r", spawn "killall xmobar; xmonad --recompile; xmonad --restart")
   , ("M-S-q", io exitSuccess)
 
-
-  -- Dmenu!
-
-
-
   ] ++ [
   -- focus on workspace
   ("M-" ++ key, windows $ greedyViewOnScreen screen workspace) | (workspace, key, screen) <- workspaceConfig
   ] ++ [
   -- move window to workspace
   ("M-S-" ++ key, windows $ W.shift workspace) | (workspace, key, _) <- workspaceConfig
-  ] ++ [
-  (baseShortcut ++ " " ++ editorShortcut, spawn editorCmd) | (baseShortcut, editorShortcut, editorCmd) <- appShortcuts ++ map (\x -> (fst3 x, "M-" ++ snd3 x, thd3 x)) appShortcuts
   ]
 
 
