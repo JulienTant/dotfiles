@@ -1,0 +1,27 @@
+Config { font = "xft:JetBrainsMono Nerd Font:weight=bold:pixelsize=12:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Font Awesome 5 Free Solid:pixelsize=12"
+                           , "xft:Font Awesome 5 Brands:pixelsize=12"
+                           ]
+       , borderColor = "black"
+       , border = TopB
+       , bgColor      = "#2E3440"
+       , fgColor      = "#D8DEE9"
+       , alpha = 255
+       , position = TopSize L 100 32
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = False
+       , overrideRedirect = True
+       , commands = [
+           Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+           , Run UnsafeXPropertyLog "_XMONAD_LOG_TOP_LEFT"
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%_XMONAD_LOG_TOP_LEFT% }{ <fc=#ee9a00>%date%</fc>"
+       }
