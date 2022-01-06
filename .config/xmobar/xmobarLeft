@@ -1,3 +1,4 @@
+
 Config { font = "xft:JetBrainsMono Nerd Font:weight=bold:pixelsize=12:antialias=true:hinting=true"
        , additionalFonts = [ "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"
@@ -20,8 +21,13 @@ Config { font = "xft:JetBrainsMono Nerd Font:weight=bold:pixelsize=12:antialias=
        , commands = [
            Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
            , Run UnsafeXPropertyLog "_XMONAD_LOG_TOP_LEFT"
-                    ]
+           , Run Alsa "default" "Master"
+                 [
+                   "-t", "<action=`amixer set Master 5%+` button=1><action=`amixer set Master toggle` button=2><action=`amixer set Master 5%-` button=3><action=`amixer set Master 5%+` button=4><action=`amixer set Master 5%-` button=5>  <volume></action></action></action></action></action>"
+                 ]
+
+           ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%_XMONAD_LOG_TOP_LEFT% }{ <fc=#ee9a00>%date%</fc>"
+       , template = "%_XMONAD_LOG_TOP_LEFT% }{ %alsa:default:Master% | <fc=#ee9a00>%date%</fc>"
        }
