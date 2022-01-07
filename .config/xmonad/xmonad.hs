@@ -182,7 +182,7 @@ myKeys c = mkKeymap c $
 
 
   -- XMONAD CONTROL
-  , ("M-S-r", spawn "killall xmobar; xmonad --recompile; xmonad --restart")
+  , ("M-S-r", spawn "killall -r 'xmobar*'; xmonad --recompile; xmonad --restart")
   , ("M-S-q", io exitSuccess)
 
   ] ++ [
@@ -354,8 +354,8 @@ ppTopLeft = xmobarPP {
     }
 ppTopRight = ppTopLeft
 
-xmobarTopLeft    = statusBarPropTo "_XMONAD_LOG_TOP_LEFT" "xmobar -x 1 ~/.config/xmobar/xmobarLeft"    (clickablePP ppTopLeft)
-xmobarTopRight      = statusBarPropTo "_XMONAD_LOG_TOP_RIGHT" "xmobar -x 0 ~/.config/xmobar/xmobarRight"       (clickablePP ppTopRight)
+xmobarTopLeft    = statusBarPropTo "_XMONAD_LOG_TOP_LEFT" "xmobarLeft"    (clickablePP ppTopLeft)
+xmobarTopRight      = statusBarPropTo "_XMONAD_LOG_TOP_RIGHT" "xmobarRight"       (clickablePP ppTopRight)
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
