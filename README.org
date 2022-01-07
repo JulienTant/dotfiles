@@ -61,9 +61,20 @@ dotfiles push
 
 #+end_src
 
-** TODO Installation on a new system
+** Installation on a new system
+
+To install the dotfiles, you can either do a simple git clone and copy the files you want/need, or do a bare clone and checkout:
 
 
+#+begin_src sh
 
+cd ~
+git clone --bare https://github.com/julientant/dotfiles.git .dotfiles
+alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+mkdir -p .dotfiles-backup
+dotfiles checkout
 
-[[https://www.atlassian.com/git/tutorials/dotfiles][Altassian Blog]]
+#+end_src
+
+The checkout command might complain about existing files. You can either remove them, or be safe and copy them to have a backup. When done, use the checkout command again.
+
