@@ -1,0 +1,69 @@
+#+TITLE: Julien's Dotfiles
+
+Dotfiles are a constant work in progress, this one is not yet ready to use! Be warned :)
+
+Here's a todolist:
+
+- [ ] All folders must have a readme
+- [ ] Give more info about my system
+- [ ] Make tutorial for my future self :-) ... and for others :D
+
+
+* About this document
+
+As an Emacs user, I edit this document in Org Mode (notice the file extension). Github can parse Org documents but sometimes the result is kinda weird.
+
+
+* How I manage my dotfiles
+
+I know two ways of managing dotfiles:
+
+- having a dotfiles folder where the original files live, and then use symlinks to make those file "appear" where they are suppose to. You could use a tool like [[https://www.gnu.org/software/stow/][GNU Stow]] to manage your symlinks.
+- versionning directly the original files.
+
+I decided to go with the latter, using a bare git repository.
+
+** Bare git repository
+
+A repository created with ~git init~ contain your working tree composed of the files currently checked out and a =.git/= folder, containing all git related information of your repo. This kind of repository is ideal for a project on which you are working and where almost everything in there needs to be versionned.
+
+A bare git repository, created with ~git init --bare~ are a bit different, first they do not create a =.git= folder, all the git related content is the actual content of this repository.
+
+I am using a bare git repository to manage my dotfiles.  In a usual git repository, that you'll start using ~git init~, a =.git= folder will be created in this folder to store all the information related to this project. The git repository is tightly related to the project. The source files do not live inside of the repository.
+
+For me this is ideal as my git repository can live in its own folder (=~/.dotfiles=) and my files can live where they are suppose to be. And for the rest of the world, it does not makes any difference: if you close the repository, it'll act like a normal (as in non bare) git repository. Also, git bare repository don't care about other git repositories, which is a plus!
+
+** Set up
+
+First we'll create our bare repository, and create an alias for git to work with it:
+
+#+begin_src sh
+
+git init --bare $HOME/.dotfiles
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# v-- dotfiles=git as defined here --^
+dotfiles config --local status.showUntrackedFiles no
+# change .zshenv bellow by .bashrc or .zshrc if you prefer.
+echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOMEalias" >> $HOME/.zshenv
+
+#+end_src
+
+So we created a bare repository in =$HOME/.dotfiles=, created an alias ~dotfiles~ to as in lieu of ~git~ when working with our dotfiles. Then we tell our git repository that we don't want a list of the untracked files when issuing the command ~dotfiles status~, and finally we insert our alias in our shell autoloaded file.
+
+Now just use ~dotfiles~ as you would git for your operations!
+
+#+begin_src sh
+
+dotfiles status
+dotfiles add your/config/file
+dotfiles commit -m "your message"
+dotfiles push
+
+#+end_src
+
+** TODO Installation on a new system
+
+
+
+
+[[https://www.atlassian.com/git/tutorials/dotfiles][Altassian Blog]]
