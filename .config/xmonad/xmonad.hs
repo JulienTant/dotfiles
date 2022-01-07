@@ -140,8 +140,8 @@ workspaceConfig = [ ("www", "1", leftScreen)
   , ("6", "6", leftScreen)
   , ("7", "7", leftScreen)
   , ("8", "8", leftScreen)
-  , ("email", "9", leftScreen)
-  , ("music", "0", leftScreen)
+  , ("email", "9", rightScreen)
+  , ("music", "0", rightScreen)
   ]
 
 
@@ -164,21 +164,17 @@ myKeys c = mkKeymap c $
 
   -- Screenshots
   ,  ("M-S-s", spawn "scrot -s '/home/a/screenshots/%F_%T.png' -e 'xclip -selection clipboard -target image/png -i $f'")
+  -- Scratchpads
+  , ("M-`", namedScratchpadAction myScratchpads "ScratchyKitty")
 
-  -- Kill applications
+   -- Window control
   , ("M-w", kill)
+  , ("M-t", withFocused $ windows . W.sink)
 
 
   -- Layout Control
   , ("M-<Space>", sendMessage NextLayout)
   , ("M-S-<Space>", setLayout $ XMonad.layoutHook c)
-
-  -- Window control
-  , ("M-t", withFocused $ windows . W.sink)
-
-  -- Scratchpads
-  , ("M-`", namedScratchpadAction myScratchpads "ScratchyKitty")
-
 
 
   -- XMONAD CONTROL
@@ -330,6 +326,9 @@ myStartupHook = do
   -- upon startup, start some app on their workspaces
   spawnOnOnce "www" "brave"
   spawnNOnOnce 4 "sys" myTerminal
+
+  windows $ greedyViewOnScreen leftScreen "www"
+  windows $ greedyViewOnScreen rightScreen "code"
 
 
 ppTopLeft = xmobarPP {
