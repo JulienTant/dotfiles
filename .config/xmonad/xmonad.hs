@@ -353,8 +353,8 @@ ppTopLeft = xmobarPP {
     }
 ppTopRight = ppTopLeft
 
-xmobarTopLeft    = statusBarPropTo "_XMONAD_LOG_TOP_LEFT" "xmobarLeft"    (clickablePP ppTopLeft)
-xmobarTopRight      = statusBarPropTo "_XMONAD_LOG_TOP_RIGHT" "xmobarRight"       (clickablePP ppTopRight)
+xmobarTopLeft    = statusBarPropTo "_XMONAD_LOG_TOP_LEFT" "xmobarLeft"    (clickablePP . filterOutWsPP [scratchpadWorkspaceTag] $ ppTopLeft)
+xmobarTopRight      = statusBarPropTo "_XMONAD_LOG_TOP_RIGHT" "xmobarRight"       (clickablePP . filterOutWsPP [scratchpadWorkspaceTag] $ ppTopRight)
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
