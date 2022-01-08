@@ -6,5 +6,5 @@ case "$(echo -e "Shutdown\nRestart\nLogout" | dmenu \
     "Power:" -l 5)" in
         Shutdown) exec systemctl poweroff;;
         Restart) exec systemctl reboot;;
-        Logout) kill -HUP $XDG_SESSION_PID;;
+        Logout) exec loginctl terminate `awk 'NR==1{print $1}'`;;
 esac
