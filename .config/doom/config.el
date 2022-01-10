@@ -7,16 +7,25 @@
 (setq user-full-name       "Julien Tant"
       user-mail-address    "julien@craftyx.fr")
 
-(setq doom-font                (font-spec :family "JetBrainsMono Nerd Font" :size 13)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(setq doom-font                (font-spec :family "JetBrainsMono Nerd Font" :size 15)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
+      doom-big-font            (font-spec :family "JetBrainsMono Nerd Font" :size 24))
 
-(setq doom-theme 'doom-nord)
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+
+
+(setq doom-theme 'doom-gruvbox)
 
 ;; display the absolute line numbers (with t). other options are nil (no line numbers) or relative (line numbers relative to the cursor position)
 (setq display-line-numbers-type t)
 
-(make-directory "~/org")
-(make-directory "~/org-roam")
+(make-directory "~/org" 'parents)
+(make-directory "~/org-roam" 'parents)
 
 (setq org-directory (file-truename "~/org/"))
 (setq org-roam-directory (file-truename "~/org-roam"))
@@ -26,30 +35,11 @@
   :hook (org-mode . org-auto-tangle-mode)
   )
 
-;; -xdg because my config is in .config/ folder
-(setq +notmuch-sync-backend 'mbsync-xdg)
-
-(set-email-account! "aosixphone-gmail"
-  '((mu4e-sent-folder       . "/aosixphone-gmail/sent")
-    (mu4e-drafts-folder     . "/aosixphone-gmail/draft")
-    (mu4e-trash-folder      . "/aosixphone-gmail/trash")
-    (mu4e-refile-folder     . "/aosixphone-gmail/refile")
-    (smtpmail-smtp-user     . "aosixphone@gmail.com")
-    (mu4e-compose-signature . ""))
-  t)
-
-
-(set-email-account! "craftyx-gmail"
-  '((mu4e-sent-folder       . "/craftyx-gmail/sent")
-    (mu4e-drafts-folder     . "/craftyx-gmail/draft")
-    (mu4e-trash-folder      . "/craftyx-gmail/trash")
-    (mu4e-refile-folder     . "/craftyx-gmail/refile")
-    (smtpmail-smtp-user     . "julien@craftyx.fr")
-    (mu4e-compose-signature . ""))
-  nil)
-
-(setq +mu4e-gmail-accounts '(("aosixphone@gmail.com" . "/aosixphone-gmail")
-                             ("julien@craftyx.fr" . "/craftyx-gmail")))
-
-;; refresh automatically the emails
-(after! mu4e (setq mu4e-update-interval 300))
+(after! circe
+  (set-irc-server! "irc.libera.chat"
+    `(:tls t
+      :port 6697
+      :nick "JulienTant"
+      :sasl-username "JulienTant"
+      :sasl-password (lambda (&rest _) (+pass-get-secret "irc/libera.chat"))
+      :channels ("#emacs", "#neomutt"))))

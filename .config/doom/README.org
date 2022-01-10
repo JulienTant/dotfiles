@@ -1,0 +1,18 @@
+#+title: Doom Emacs
+
+* Installation
+
+- Install emacs
+- Clone [[https://github.com/hlissner/doom-emacs][doom emacs]]. DO NOT RUN THE INSTALL.
+  - note: I recommend cloning into =~/.config/emacs= instead of the =~/.emacs.d= recommended by their documentation
+  - you can add =~/.config/emacs/bin= to your ~$PATH~
+- Get the files from this repo in =~/.config/doom= (or =~/.doom.d= if you decided to stick with =~/.emacs.d=), then run
+#+begin_src sh
+
+~/.config/emacs/bin/doom sync
+~/.config/emacs/bin/doom env
+emacs --batch -f all-the-icons-install-fonts
+
+#+end_src
+
+It'll take a while! Get yourself a drink!
