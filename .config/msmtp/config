@@ -11,11 +11,6 @@ port 587
 from aosixphone@gmail.com
 user aosixphone@gmail.com
 passwordeval "pass emails/aosixphone@gmail.com"
-auth on
-tls on
-tls_trust_file	/etc/ssl/certs/ca-certificates.crt
-logfile /home/a/.config/msmtp/msmtp.log
-# tls_starttls
 
 account julien@craftyx.fr
 host smtp.gmail.com
@@ -23,9 +18,3 @@ port 465
 from julien@craftyx.fr
 user julien@craftyx.fr
 passwordeval "pass emails/julien@craftyx.fr"
-auth on
-tls on
-tls_trust_file	/etc/ssl/certs/ca-certificates.crt
-logfile /home/a/.config/msmtp/msmtp.log
-tls_starttls off
-
