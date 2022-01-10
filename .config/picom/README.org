@@ -1,0 +1,3 @@
+#+TITLE: Picom
+
+Picom is a compositor for Xorg, it allows us to manage window transparency and other effects.
