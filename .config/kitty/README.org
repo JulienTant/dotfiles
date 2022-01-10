@@ -1,0 +1,3 @@
+#+TITLE: Kitty
+
+Kitty is our terminal emulator
