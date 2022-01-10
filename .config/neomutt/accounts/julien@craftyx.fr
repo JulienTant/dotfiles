@@ -1,0 +1,20 @@
+unmailboxes *
+
+## Account settings
+set from = julien@craftyx.fr
+set realname = "Julien Tant"
+
+set mbox_type = Maildir
+set folder = "~/.mail/julien@craftyx.fr"
+set sendmail = "msmtp -a julien@craftyx.fr"
+set header_cache = "~/.cache/mutt/julien@craftyx.fr/header_cache"
+set message_cachedir = "~/.cache/mutt/julien@craftyx.fr/message_cache"
+
+# mailbox settings
+set spoolfile = +INBOX
+set postponed = +Drafts
+unset record
+set trash = +Trash
+set move = no
+
+mailboxes "=INBOX" "=All\ Mail" "=Drafts" "=Sent\ Mail" "=Spam" "=Trash"

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd ~ || exit
+mbsync -c ~/.config/mbsync/mbsyncrc -a
+notmuch new

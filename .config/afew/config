@@ -1,0 +1,32 @@
+[SpamFilter]
+[KillThreadsFilter]
+[ListMailsFilter]
+[ArchiveSentMailsFilter]
+sent_tag = ''
+[InboxFilter]
+
+[Filter.1]
+query = to:'ao6@free.fr'
+tags = +ao6@free.fr
+message = ao6 free
+
+[Filter.2]
+query = to:'aka59fr*@gmail.com'
+tags = +aka59fr@free.fr
+message = aka59fr gmail
+
+[Filter.3]
+query = to:'julien@laravel.fr'
+tags = +julien@laravel.fr
+message = julien laravel
+
+[Filter.4]
+query = to:'link59*@gmail.com'
+tags = +link59@gmil.com
+message = link59 gmail
+
+
+
+
+
+

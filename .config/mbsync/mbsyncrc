@@ -1,0 +1,150 @@
+Create Both
+Expunge Both
+SyncState *
+
+########################################
+# aosixphone@gmail.com
+########################################
+IMAPAccount aosixphone@gmail.com
+Host imap.gmail.com
+User aosixphone@gmail.com
+PassCmd "pass emails/aosixphone@gmail.com | head -n1"
+Port 993
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# Remote
+IMAPStore aosixphone@gmail.com-remote
+Account aosixphone@gmail.com
+
+# Local
+MaildirStore aosixphone@gmail.com-local
+Path ~/.mail/aosixphone@gmail.com/
+Inbox ~/.mail/aosixphone@gmail.com/INBOX
+
+## Connections
+Channel aosixphone@gmail.com-all
+Far :aosixphone@gmail.com-remote:"[Gmail]/All Mail"
+Near :aosixphone@gmail.com-local:"All Mail"
+Create Near
+Expunge Both
+SyncState *
+
+Channel aosixphone@gmail.com-inbox
+Far :aosixphone@gmail.com-remote:"INBOX"
+Near :aosixphone@gmail.com-local:"INBOX"
+Create Near
+Expunge Both
+SyncState *
+
+Channel aosixphone@gmail.com-drafts
+Far :aosixphone@gmail.com-remote:"[Gmail]/Drafts"
+Near :aosixphone@gmail.com-local:"Drafts"
+Create Near
+Expunge Both
+SyncState *
+
+Channel aosixphone@gmail.com-sent
+Far :aosixphone@gmail.com-remote:"[Gmail]/Sent Mail"
+Near :aosixphone@gmail.com-local:"Sent Mail"
+Create Near
+Expunge Both
+SyncState *
+
+Channel aosixphone@gmail.com-trash
+Far :aosixphone@gmail.com-remote:"[Gmail]/Trash"
+Near :aosixphone@gmail.com-local:"Trash"
+Create Near
+Expunge Both
+SyncState *
+
+Channel aosixphone@gmail.com-spam
+Far :aosixphone@gmail.com-remote:"[Gmail]/Spam"
+Near :aosixphone@gmail.com-local:"Spam"
+Create Near
+Expunge Both
+SyncState *
+
+## Groups
+Group aosixphone@gmail.com
+Channel aosixphone@gmail.com-all
+Channel aosixphone@gmail.com-inbox
+Channel aosixphone@gmail.com-drafts
+Channel aosixphone@gmail.com-sent
+Channel aosixphone@gmail.com-trash
+Channel aosixphone@gmail.com-spam
+
+########################################
+# julien@craftyx.fr
+########################################
+IMAPAccount julien@craftyx.fr
+Host imap.gmail.com
+User julien@craftyx.fr
+PassCmd "pass emails/julien@craftyx.fr | head -n1"
+Port 993
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# Remote
+IMAPStore julien@craftyx.fr-remote
+Account julien@craftyx.fr
+
+# Local
+MaildirStore julien@craftyx.fr-local
+Path ~/.mail/julien@craftyx.fr/
+Inbox ~/.mail/julien@craftyx.fr/INBOX
+
+## Connections
+Channel julien@craftyx.fr-all
+Far :julien@craftyx.fr-remote:"[Gmail]/All Mail"
+Near :julien@craftyx.fr-local:"All Mail"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien@craftyx.fr-inbox
+Far :julien@craftyx.fr-remote:"INBOX"
+Near :julien@craftyx.fr-local:"INBOX"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien@craftyx.fr-drafts
+Far :julien@craftyx.fr-remote:"[Gmail]/Drafts"
+Near :julien@craftyx.fr-local:"Drafts"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien@craftyx.fr-sent
+Far :julien@craftyx.fr-remote:"[Gmail]/Sent Mail"
+Near :julien@craftyx.fr-local:"Sent Mail"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien@craftyx.fr-trash
+Far :julien@craftyx.fr-remote:"[Gmail]/Trash"
+Near :julien@craftyx.fr-local:"Trash"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien@craftyx.fr-spam
+Far :julien@craftyx.fr-remote:"[Gmail]/Spam"
+Near :julien@craftyx.fr-local:"Spam"
+Create Near
+Expunge Both
+SyncState *
+
+
+## Groups
+Group julien@craftyx.fr
+Channel julien@craftyx.fr-all
+Channel julien@craftyx.fr-inbox
+Channel julien@craftyx.fr-drafts
+Channel julien@craftyx.fr-sent
+Channel julien@craftyx.fr-trash
+Channel julien@craftyx.fr-spam

@@ -1,0 +1,30 @@
+# Disable the "press a key" thingy whenever we run a script
+set wait_key = no
+
+# disable marking the messages as Old when they are new but unread between sessions
+set mark_old = no
+
+# Open sidebar
+set sidebar_visible = yes
+set sidebar_format = "%D%* %?N?[%N]?"
+
+# unbind x (leaves the application)
+unbind * x
+
+# Allow threads
+set use_threads=threads sort=reverse-last-date sort_aux=reverse-last-date
+
+macro index,pager <f2> '<sync-mailbox><refresh><enter-command>source ~/.config/neomutt/accounts/aosixphone@gmail.com<enter><change-folder>!<enter>;<check-stats>' "switch to aosixphone@gmail.com"
+macro index,pager <f3> '<sync-mailbox><refresh><enter-command>source ~/.config/neomutt/accounts/julien@craftyx.fr<enter><change-folder>!<enter>;<check-stats>' "switch to julien@craftyx.fr"
+
+source ~/.config/neomutt/accounts/aosixphone@gmail.com
+
+macro index G "!~/.local/bin/sync-mail &> /dev/null &^M" "Synchronize mail"
+
+
+# load theme
+source ~/.config/neomutt/theme.muttrc
+
+# theme customization
+color index bold color234 color142 ~N
+color index bold color234 color108 ~O
