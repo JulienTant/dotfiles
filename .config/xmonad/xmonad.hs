@@ -39,24 +39,40 @@ import XMonad.Util.ClickableWorkspaces
 ---
 -- Theme
 ---
-colorBack   = "#2E3440"
-colorFore   = "#D8DEE9"
-color01     = "#343d46"
-color02     = "#EC5f67"
-color03     = "#99C794"
-color04     = "#FAC863"
-color05     = "#6699cc"
-color06     = "#c594c5"
-color07     = "#5fb3b3"
-color08     = "#d8dee9"
-color09     = "#343d46"
-color10     = "#EC5f67"
-color11     = "#99C794"
-color12     = "#FAC863"
-color13     = "#6699cc"
-color14     = "#c594c5"
-color15     = "#5fb3b3"
-color16     = "#d8dee9"
+colorFore = "#ebdbb2"
+colorBack = "#272727"
+
+-- black
+color01 =  "#272727"
+color09 =  "#928373"
+
+-- red
+color02  =  "#cc231c"
+color10  =  "#fb4833"
+
+-- green
+color03  =  "#989719"
+color11 = "#b8ba25"
+
+-- yellow
+color04  = "#d79920"
+color12 = "#fabc2e"
+
+-- blue
+color05  = "#448488"
+color13 = "#83a597"
+
+-- magenta
+color06  = "#b16185"
+color14 = "#d3859a"
+
+-- cyan
+color07  = "#689d69"
+color15 = "#8ec07b"
+
+-- white
+color08  = "#a89983"
+color16 = "#ebdbb2"
 
 
 
@@ -66,8 +82,8 @@ myFocusFollowsMouse         = True
 myClickJustFocuses          = False
 myBorderWidth               = 2
 myModMask                   = mod4Mask
-myNormalBorderColor         = colorBack
-myFocusedBorderColor        = color15
+myNormalBorderColor         = color08
+myFocusedBorderColor        = color12
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.

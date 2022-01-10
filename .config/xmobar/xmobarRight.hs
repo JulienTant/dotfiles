@@ -7,8 +7,8 @@ config = defaultConfig { font = "xft:JetBrainsMono Nerd Font:weight=bold:pixelsi
                            ]
        , borderColor = "black"
        , border = TopB
-       , bgColor      = "#2E3440"
-       , fgColor      = "#D8DEE9"
+       , bgColor      = "#272727"
+       , fgColor      = "#ebdbb2"
        , alpha = 255
        , position = OnScreen 0 $ TopSize L 100 32
        , textOffset = -1
