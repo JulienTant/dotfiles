@@ -31,9 +31,8 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.ClickableWorkspaces
-
-
-
+import XMonad.Layout.NoBorders
+import XMonad.Layout.Tabbed
 
 
 ---
@@ -193,6 +192,9 @@ myKeys c = mkKeymap c $
   , ("M-S-<Space>", setLayout $ XMonad.layoutHook c)
 
 
+  -- Window selection
+  , ("M-<Tab>", windows W.focusDown)
+
   -- XMONAD CONTROL
   , ("M-S-r", spawn "killall -r 'xmobar*'; xmonad --recompile; xmonad --restart")
   , ("M-S-q", io exitSuccess)
@@ -236,20 +238,35 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
+myTabConfig = def {
+  fontName            = "xft:JetBrainsMono Nerd Font:size=11"
+  , activeColor         = "#81A1C1"
+  , activeBorderColor   = "#81A1C1"
+  , activeTextColor     = "#3B4252"
+  , activeBorderWidth   = 0
+  , inactiveColor       = "#3B4252"
+  , inactiveBorderColor = "#3B4252"
+  , inactiveTextColor   = "#ECEFF4"
+  , inactiveBorderWidth = 0
+  , urgentColor         = "#BF616A"
+  , urgentBorderColor   = "#BF616A"
+  , urgentBorderWidth   = 0
+  }
+
 myLayout = do
-  avoidStruts $ spacingWithEdge 10 $ tiled ||| Mirror tiled ||| Full
+  tiled ||| mirrorTiled ||| myTabbed ||| full
   where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
-
-     -- The default number of windows in the master pane
+     -- tiled
+     tiled   = avoidStruts $ spacingWithEdge 10 $ Tall nmaster delta ratio
      nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
      ratio   = 1/2
-
-     -- Percent of screen to increment by when resizing panes
      delta   = 3/100
+     -- mirrorTiled
+     mirrorTiled  = avoidStruts $ spacingWithEdge 10 $  Mirror $ Tall nmaster delta ratio
+     -- tabbed
+     myTabbed = avoidStruts $ noBorders $ tabbedBottom shrinkText myTabConfig
+     -- full
+     full = noBorders Full
 
 
 ------------------------------------------------------------------------
