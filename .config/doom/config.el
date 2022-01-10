@@ -42,4 +42,4 @@
       :nick "JulienTant"
       :sasl-username "JulienTant"
       :sasl-password (lambda (&rest _) (+pass-get-secret "irc/libera.chat"))
-      :channels ("#emacs", "#neomutt"))))
+      :channels ("#emacs", "#neomutt", "#xmonad"))))
