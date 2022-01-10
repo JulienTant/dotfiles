@@ -1,9 +1,12 @@
 # Set default values for all following accounts.
 defaults
 auth           on
+port           587
 tls            on
 tls_trust_file /etc/ssl/certs/ca-certificates.crt
 logfile        ~/.local/state/msmtp/msmtp.log
+tls_starttls off
+
 
 account aosixphone@gmail.com
 host smtp.gmail.com
