@@ -11,6 +11,11 @@ set sidebar_format = "%D%* %?N?[%N]?"
 # unbind x (leaves the application)
 unbind * x
 
+# autorefresh
+set timeout = 300
+timeout-hook 'exec shell-escape `~/.local/bin/sync-mail &> /dev/null &`; exec sync-mailbox; exec check-stats'
+
+
 # Allow threads
 set use_threads=threads sort=reverse-last-date sort_aux=reverse-last-date
 
@@ -19,7 +24,7 @@ macro index,pager <f3> '<sync-mailbox><refresh><enter-command>source ~/.config/n
 
 source ~/.config/neomutt/accounts/aosixphone@gmail.com
 
-macro index G "!~/.local/bin/sync-mail &> /dev/null &^M" "Synchronize mail"
+macro index G "<shell-escape>~/.local/bin/sync-mail &> /dev/null &^M" "Synchronize mail"
 
 
 # load theme

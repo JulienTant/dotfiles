@@ -45,7 +45,7 @@ notmuch database is located in =~/.mail/.notmuch/=, and we installed a hook for 
 
 *** Synchronization
 
-mbsync and notmuch are both called using a custom script in =~/.local/bin/sync-mail=. I don't automatically synchronize my emails to prevent being distracted by notifications.
+mbsync and notmuch are both called using a custom script in =~/.local/bin/sync-mail=. When inactive, neomutt will issue the command to fetch now mail automatically.
 
 *** neomutt
 
