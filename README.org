@@ -14,6 +14,70 @@ Here's a todolist:
 As an Emacs user, I edit this document in Org Mode (notice the file extension). Github can parse Org documents but sometimes the result is kinda weird.
 
 
+* The content
+
+** Password mangement
+
+
+1. Enable allow-present-passphrase, and set pretty high cache ttls
+
+#+begin_src sh
+echo -e "allow-preset-passphrase\ndefault-cache-ttl 1209600\nmax-cache-ttl 1209600\nmax-cache-ttl-ssh 1209600" > ~/.gnupg/gpg-agent.conf
+#+end_src
+
+2. Get the keygrip of your gpg key
+
+#+begin_src sh
+gpg --with-keygrip -K
+#+end_src
+
+3. replace  XXXXXX bellow by your key grip
+
+#+begin_src sh
+/usr/lib/gnupg/gpg-preset-passphrase --preset XXXXX
+#+end_src
+
+** TODO Window manager: Xmonad
+
+** TODO Topbar: Xmonad
+
+** TODO Editor: Emacs (Doom emacs)
+
+** TODO Emails
+
+I'm using [[https://neomutt.org/][neomutt]] as my main email client. I do have a thunderbird arround also when I need something more adapted to the context (heavily html'd emails). Here's how it works:
+
+*** isync (mbsync)
+
+I'm using mbsync (from the isync package) to download all my emails from the remote to my local file system. mbsync also push to the remote all the operations i'm doing locally (delete email for example).
+
+Having everything locally has many advantages:
+
+- my email does not depend of my email provider
+- searching and accessing email is super fast
+
+All my emails are downloaded in =~/.mail/{email_address}=
+
+*** notmuch+afew
+
+notmuch is an email indexer, it works by applying tags to emails in its database, and we can then use it to search quickly emails! We use it with afew, which is used to automatically apply tags.
+
+notmuch database is located in =~/.mail/.notmuch/=, and we installed a hook for afew at =~/.mail/.notmuch/hooks/post-new= (file mode +x).
+
+*** Synchronization
+
+mbsync and notmuch are both called using a custom script in =~/.local/bin/sync-mail=. I don't automatically synchronize my emails to prevent being distracted by notifications.
+
+*** neomutt
+
+I use neomutt as my emails client. It is configure to read my local emails and have no knowledge of the remote. Sending an email use my default editor.
+
+**** TODO Useful keybinding
+
+*** msmtp
+
+Emails are sent using msmtp. neomutt is responsible for calling msmtp.
+
 * How I manage my dotfiles
 
 I know two ways of managing dotfiles:
