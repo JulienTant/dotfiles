@@ -27,6 +27,11 @@ source ~/.config/neomutt/accounts/aosixphone@gmail.com
 macro index G "<shell-escape>~/.local/bin/sync-mail &> /dev/null &^M" "Synchronize mail"
 
 
+# use urlscan to open links in my browser
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+
 # load theme
 source ~/.config/neomutt/theme.muttrc
 
