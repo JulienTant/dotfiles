@@ -354,7 +354,7 @@ myStartupHook = do
   spawnOnce "nm-applet"
   spawnOnce "emacs --daemon"
   spawn "numlockx"
-
+  spawnOnce "redshift"
 
   -- upon startup, start some app on their workspaces
   spawnOnOnce "www" "brave"

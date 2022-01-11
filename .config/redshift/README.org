@@ -1,0 +1,3 @@
+#+TITLE: Redshift
+
+Redshift is a program that changes the screen brightness and color to make it easier on your eyes, especially at night time.
