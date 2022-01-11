@@ -1,0 +1,7 @@
+# managing dotfile
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfilesp='/usr/bin/git --git-dir=$HOME/.dotfiles-private/ --work-tree=$HOME'
+
+alias igrep="grep -i"
+
+alias ll="ls -laF"
