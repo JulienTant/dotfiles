@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+_pkgname=dmenu
+pkgname=$_pkgname-local
+pkgver=5.0.0
+pkgrel=1
+pkgdesc="A generic menu for X"
+url="http://tools.suckless.org/dmenu/"
+arch=('i686' 'x86_64')
+license=('MIT')
+depends=('sh' 'libxinerama' 'libxft')
+provides=($_pkgname)
+conflicts=($_pkgname)
+source=()
+sha256sums=('SKIP')
+
+package() {
+    cd ..
+    make install
+    install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+}
