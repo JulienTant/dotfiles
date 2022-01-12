@@ -13,6 +13,7 @@ We compile xmobar to allow us to add code into the configuration.
 2. clone [[https://github.com/xmonad/xmonad][xmonad]], [[https://github.com/xmonad/xmonad-contrib][xmonad-contrib]] and [[https://github.com/cdepillabout/pretty-simple][pretty-simple]] in this repository
 3. run ~stack init~ and ~stack install~
 4. We had to make an executable file named =build= in the directory to tell xmonad how to recompile itself
+5. copy the desktop file to =/usr/share/xsessions/xmonad.desktop=
 
 ** My Workspaces
 
