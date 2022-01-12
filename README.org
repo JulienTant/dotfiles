@@ -121,3 +121,6 @@ dotfiles checkout
 
 The checkout command might complain about existing files. You can either remove them, or be safe and copy them to have a backup. When done, use the checkout command again.
 
+*** oh my zsh theme
+
+The theme we used is localted in home, we must make a symlink to the omz custom theme folder: ~ln -s .gruvbox.zsh-theme .oh-my-zsh/custom/themes/gruvbox.zsh-theme~
