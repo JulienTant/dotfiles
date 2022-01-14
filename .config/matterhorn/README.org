@@ -1,0 +1,23 @@
+#+TITLE: Matterhorn
+
+Matterhorn is a mattermost TUI client.
+
+* Connection
+
+Being I'm using SAML to login on the mattermost community server and API tokens are disabled, I use a "hack" consisting in using my ~MMAUTHTOKEN~ cookie as an token. The token is stored in my password store.
+
+* Keybindings
+
+Some useful keybindings:
+
+| Key            | Desc                            |
+|----------------+---------------------------------|
+| F2             | Toggle sidebar                  |
+| F3             | Toggle long channel description |
+| C-r            | Quick reply to the last thread  |
+| C-s            | Select a message                |
+| C-g            | Quick jump to a channel or DM   |
+| C-<Left\vert{}Right> | Switch to team                  |
+| M-k            | Invoke $EDITOR                  |
+| M-e            | Change input to multi line mode |
+| M-s            | Focus on the last channel       |
