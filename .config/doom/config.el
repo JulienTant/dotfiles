@@ -30,10 +30,10 @@
 (setq org-directory (file-truename "~/org/"))
 (setq org-roam-directory (file-truename "~/org-roam"))
 
- (use-package! org-auto-tangle
-  :defer t
-  :hook (org-mode . org-auto-tangle-mode)
-  )
+(use-package! org-auto-tangle
+ :defer t
+ :hook (org-mode . org-auto-tangle-mode)
+ )
 
 (after! circe
   (set-irc-server! "irc.libera.chat"
