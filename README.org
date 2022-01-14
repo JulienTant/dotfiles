@@ -13,6 +13,13 @@ Here's a todolist:
 
 As an Emacs user, I edit this document in Org Mode (notice the file extension). Github can parse Org documents but sometimes the result is kinda weird.
 
+* Adding current user bin to global path
+
+I like to add current user bin directories into the global $PATH. Edit =/etc/profile= to add
+#+begin_src sh
+append_path "$HOME/.local/bin"
+append_path "$HOME/bin"
+#+end_src
 
 * The content
 
