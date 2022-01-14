@@ -17,3 +17,5 @@
 	user = JulienTant
 [commit]
 	gpgsign = true
+[merge]
+	conflictStyle = diff3
