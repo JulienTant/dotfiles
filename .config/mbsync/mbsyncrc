@@ -148,3 +148,77 @@ Channel julien@craftyx.fr-drafts
 Channel julien@craftyx.fr-sent
 Channel julien@craftyx.fr-trash
 Channel julien@craftyx.fr-spam
+
+########################################
+# julien.tant@mattermost.com
+########################################
+IMAPAccount julien.tant@mattermost.com
+Host imap.gmail.com
+User julien.tant@mattermost.com
+PassCmd "pass emails/julien.tant@mattermost.com | head -n1"
+Port 993
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# Remote
+IMAPStore julien.tant@mattermost.com-remote
+Account julien.tant@mattermost.com
+
+# Local
+MaildirStore julien.tant@mattermost.com-local
+Path ~/.mail/julien.tant@mattermost.com/
+Inbox ~/.mail/julien.tant@mattermost.com/INBOX
+
+## Connections
+Channel julien.tant@mattermost.com-all
+Far :julien.tant@mattermost.com-remote:"[Gmail]/All Mail"
+Near :julien.tant@mattermost.com-local:"All Mail"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien.tant@mattermost.com-inbox
+Far :julien.tant@mattermost.com-remote:"INBOX"
+Near :julien.tant@mattermost.com-local:"INBOX"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien.tant@mattermost.com-drafts
+Far :julien.tant@mattermost.com-remote:"[Gmail]/Drafts"
+Near :julien.tant@mattermost.com-local:"Drafts"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien.tant@mattermost.com-sent
+Far :julien.tant@mattermost.com-remote:"[Gmail]/Sent Mail"
+Near :julien.tant@mattermost.com-local:"Sent Mail"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien.tant@mattermost.com-trash
+Far :julien.tant@mattermost.com-remote:"[Gmail]/Trash"
+Near :julien.tant@mattermost.com-local:"Trash"
+Create Near
+Expunge Both
+SyncState *
+
+Channel julien.tant@mattermost.com-spam
+Far :julien.tant@mattermost.com-remote:"[Gmail]/Spam"
+Near :julien.tant@mattermost.com-local:"Spam"
+Create Near
+Expunge Both
+SyncState *
+
+
+## Groups
+Group julien.tant@mattermost.com
+Channel julien.tant@mattermost.com-all
+Channel julien.tant@mattermost.com-inbox
+Channel julien.tant@mattermost.com-drafts
+Channel julien.tant@mattermost.com-sent
+Channel julien.tant@mattermost.com-trash
+Channel julien.tant@mattermost.com-spam

@@ -21,3 +21,11 @@ port 465
 from julien@craftyx.fr
 user julien@craftyx.fr
 passwordeval "pass emails/julien@craftyx.fr"
+
+account julien.tant@mattermost.com
+host smtp.gmail.com
+port 465
+from julien.tant@mattermost.com
+user julien.tant@mattermost.com
+passwordeval "pass emails/julien.tant@mattermost.com"
+
