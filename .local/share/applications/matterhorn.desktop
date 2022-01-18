@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Matterhorn
+Comment=
+Exec=kitty --detach --hold --class=matterhorn zsh -i -c 'matterhorn'
+Icon=
+Terminal=False

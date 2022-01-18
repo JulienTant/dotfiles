@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Neomutt
+Comment=
+Exec=kitty --detach --hold --class=neomutt zsh -i -c 'neomutt'
+Icon=
+Terminal=False
