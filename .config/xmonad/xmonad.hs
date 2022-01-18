@@ -10,6 +10,7 @@
 
 import           Control.Monad
 import qualified Data.Bifunctor
+import Data.List (isInfixOf)
 import qualified Data.Map as M
 import           Data.Maybe
 import           Data.Monoid
@@ -18,22 +19,25 @@ import           System.IO
 import           Text.Pretty.Simple.Internal.Color (colorBold)
 import           XMonad
 import           XMonad.Actions.OnScreen
+import XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.SetWMName
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
+import XMonad.Layout.NoBorders
 import           XMonad.Layout.Spacing
+import XMonad.Layout.Tabbed
 import qualified XMonad.StackSet as W
+import XMonad.Util.ClickableWorkspaces
 import           XMonad.Util.EZConfig
 import           XMonad.Util.NamedScratchpad
 import           XMonad.Util.PureX (greedyView)
 import           XMonad.Util.Run
 import           XMonad.Util.SpawnOnce (spawnOnce, spawnOnOnce, spawnNOnOnce)
-import XMonad.Hooks.StatusBar.PP
-import XMonad.Hooks.StatusBar
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Util.ClickableWorkspaces
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Tabbed
-
+import XMonad.Util.WindowPropertiesRE
+import XMonad.Hooks.DynamicProperty
+import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Reflect (reflectHoriz)
 
 ---
 -- Theme
@@ -77,6 +81,7 @@ color16 = "#ebdbb2"
 
 myTerminal                  = "kitty"
 myEditor                    = "emacsclient -c -a 'emacs'"
+myBrowser                   = "brave"
 myFocusFollowsMouse         = True
 myClickJustFocuses          = False
 myBorderWidth               = 2
@@ -93,41 +98,11 @@ myFocusedBorderColor        = color12
 --     -- Resize viewed windows to the correct size                                              --
 --     , ((modm,               xK_n     ), refresh)                                              --
 --                                                                                               --
---     -- Move focus to the next window                                                          --
---     , ((modm,               xK_Tab   ), windows W.focusDown)                                  --
---                                                                                               --
---     -- Move focus to the next window                                                          --
---     , ((modm,               xK_j     ), windows W.focusDown)                                  --
---                                                                                               --
---     -- Move focus to the previous window                                                      --
---     , ((modm,               xK_k     ), windows W.focusUp  )                                  --
---                                                                                               --
 --     -- Move focus to the master window                                                        --
 --     , ((modm,               xK_m     ), windows W.focusMaster  )                              --
 --                                                                                               --
 --     -- Swap the focused window and the master window                                          --
 --     , ((modm,               xK_Return), windows W.swapMaster)                                 --
---                                                                                               --
---     -- Swap the focused window with the next window                                           --
---     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )                                 --
---                                                                                               --
---     -- Swap the focused window with the previous window                                       --
---     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )                                 --
---                                                                                               --
---     -- Shrink the master area                                                                 --
---     , ((modm,               xK_h     ), sendMessage Shrink)                                   --
---                                                                                               --
---     -- Expand the master area                                                                 --
---     , ((modm,               xK_l     ), sendMessage Expand)                                   --
---                                                                                               --
---     -- Push window back into tiling                                                           --
---     , ((modm,               xK_t     ), withFocused $ windows . W.sink)                       --
---                                                                                               --
---     -- Increment the number of windows in the master area                                     --
---     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))                           --
---                                                                                               --
---     -- Deincrement the number of windows in the master area                                   --
---     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))                        --
 --                                                                                               --
 --     -- Toggle the status bar gap                                                              --
 --     -- Use this binding with avoidStruts from Hooks.ManageDocks.                              --
@@ -154,7 +129,7 @@ workspaceConfig = [ ("www", "1", leftScreen)
   , ("5", "5", leftScreen)
   , ("6", "6", leftScreen)
   , ("7", "7", leftScreen)
-  , ("8", "8", leftScreen)
+  , ("zoom", "8", rightScreen)
   , ("email", "9", rightScreen)
   , ("music", "0", rightScreen)
   ]
@@ -176,6 +151,7 @@ myKeys c = mkKeymap c $
   , ("M-p", spawn "j4-dmenu-desktop")
   , ("M-<Backspace>", spawn "dmenu-power")
   , ("M-e", spawn myEditor)
+  , ("M-b", spawn myBrowser)
 
   -- Screenshots
   ,  ("M-S-s", spawn "scrot -s '/home/a/screenshots/%F_%T.png' -e 'xclip -selection clipboard -target image/png -i $f'")
@@ -194,6 +170,14 @@ myKeys c = mkKeymap c $
 
   -- Window selection
   , ("M-<Tab>", windows W.focusDown)
+  , ("M-j", windows W.focusDown)
+  , ("M-k", windows W.focusUp)
+  , ("M-S-j", windows W.swapDown)
+  , ("M-S-k", windows W.swapUp)
+
+  -- Shrink/Expand
+  , ("M-h", sendMessage Shrink)
+  , ("M-l", sendMessage Expand)
 
   -- XMONAD CONTROL
   , ("M-S-r", spawn "killall -r 'xmobar*'; xmonad --recompile; xmonad --restart")
@@ -254,13 +238,15 @@ myTabConfig = def {
   }
 
 myLayout = do
-  tiled ||| mirrorTiled ||| myTabbed ||| full
+  tiled ||| reflectTiled ||| mirrorTiled ||| myTabbed ||| full
   where
      -- tiled
      tiled   = avoidStruts $ spacingWithEdge 10 $ Tall nmaster delta ratio
      nmaster = 1
      ratio   = 1/2
      delta   = 3/100
+     -- reflect
+     reflectTiled  = avoidStruts $ spacingWithEdge 10 $ reflectHoriz $ Tall nmaster delta ratio
      -- mirrorTiled
      mirrorTiled  = avoidStruts $ spacingWithEdge 10 $  Mirror $ Tall nmaster delta ratio
      -- tabbed
@@ -295,12 +281,18 @@ myScratchpads =
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
+
+titleContains :: String -> Query Bool
+titleContains string = fmap (isInfixOf string) title
+
+
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
+    [
+      className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "feh"            --> doRectFloat (W.RationalRect (1 / 4) (1 / 4) (1 / 2) (1 / 2))
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
-
 
     -- www
     , className =? "Brave-browser"    --> doShift "www"
@@ -311,6 +303,10 @@ myManageHook = composeAll
     -- chat
     , className =? "discord"          --> doShift "chat"
     , className =? "matterhorn"       --> doShift "chat"
+    -- zoom
+    , className =? "zoom"             --> doShift "zoom"
+    -- email
+    , className =? "neomutt"          --> doShift "email"
     ] <+> namedScratchpadManageHook myScratchpads
 
 
@@ -323,7 +319,25 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = do
+   dynamicTitle $ composeAll $
+     [
+       titleContains "Emacs Everywhere" --> doCenterFloat,
+       (className =? zoomClassName) <&&> shouldFloat <$> title --> doFloat,
+       (className =? zoomClassName) <&&> shouldSink <$> title --> doSink
+     ]
+     where
+       zoomClassName = "zoom"
+       tileTitles =
+         [ "Zoom - Free Account", -- main window
+           "Zoom - Licensed Account", -- main window
+           "Zoom", -- meeting window on creation
+           "Zoom Meeting" -- meeting window shortly after creation
+         ]
+       shouldFloat title = title `notElem` tileTitles
+       shouldSink title = title `elem` tileTitles
+       doSink = (ask >>= doF . W.sink) <+> doF W.swapDown
+
 
 ------------------------------------------------------------------------
 -- Status bars and logging
