@@ -5,3 +5,11 @@ alias dotfilesp='/usr/bin/git --git-dir=$HOME/.dotfiles-private/ --work-tree=$HO
 alias igrep="grep -i"
 
 alias ll="ls -laF"
+
+
+#mattermost
+MM=~/projects/mattermost
+alias cmm="cd ${MM}"
+alias cmms="cd ${MM}/mattermost-server"
+alias cmmw="cd ${MM}/mattermost-webapp"
+alias cmmc="cd ${MM}/customer-web-server"
