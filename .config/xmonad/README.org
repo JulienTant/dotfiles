@@ -19,7 +19,7 @@ git clone https://github.com/xmonad/xmonad-extras.git
 git clone https://github.com/cdepillabout/pretty-simple.git
 #+END_SRC
 
-3. run ~stack init~ and ~stack install~
+3. run ~stack init~ (probably unnecessary) and ~stack install~
 4. We had to make an executable file named =build= in the directory to tell xmonad how to recompile itself
 5. copy the desktop file to =/usr/share/xsessions/xmonad.desktop=
 
