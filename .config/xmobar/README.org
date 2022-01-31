@@ -16,8 +16,11 @@ The left screen contain information that are in interest to me (so... the volume
 We compile xmobar to allow us to add code into the configuration.
 
 1. make sure =stack= is installed (better installing it using their script @ [[https://docs.haskellstack.org/en/stable/install_and_upgrade/][Stack: Install guide]]
-2. clone xmonad in this repository
-3. run ~stack init~
+2. clone [[https://github.com/jaor/xmobar.git][xmobar]] in this folder
+  #+BEGIN_SRC
+  git clone https://github.com/jaor/xmobar.git
+  #+END_SRC
+3. run ~stack init~ (might be unnecesarry)
 4. We had to edit the generated config file to add some extra deps and the flags to allow all extensions
 5. run ~stack install~
 6. and finally, build and install our versions of the xmobar
