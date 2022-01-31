@@ -113,6 +113,13 @@ dotfiles push
 
 ** Installation on a new system
 
+First, make sure you have this already installed:
+
+- git
+- zsh
+- oh-my-zsh
+- nvm
+
 To install the dotfiles, you can either do a simple git clone and copy the files you want/need, or do a bare clone and checkout:
 
 
